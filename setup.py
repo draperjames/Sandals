@@ -12,7 +12,7 @@ setup(
     author = "James Draper",
     author_email = "james.draper@duke.edu",
     license = "MIT",
-    url = "https://github.com/draperjames/Sandals",
+    url = "https://github.com/draperjames/sneakers",
     packages = find_packages(),
     platforms = ["POSIX", "Windows"],
     provides = ["sandals"],

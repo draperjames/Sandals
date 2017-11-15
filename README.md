@@ -1,4 +1,4 @@
-# Sandals
+# sneakers
 A TkInter wrapper for python inspired by the GUI library Shoes for Ruby.
 
 This is intended to make it easier to create simple GUI interfaces quickly. All these classes inheret from their TkInter counterparts so you can use them just as you would their original TkInter counterparts if need be.
@@ -32,7 +32,7 @@ with window("My window"):
 </pre>
 </td>
 <td>
-<img src="https://raw.githubusercontent.com/georgewalton/Sandals/master/example%20images/helloworld.png"
+<img src="example_images\\helloworld.png"
 alt="Manipulating buttons example">
 </td>
 </tr>
@@ -45,9 +45,9 @@ As mentioned below, the library needs to be ideally be rewritten to use TkInter 
 The @button and other GUI decorators
 --
 
-Adding the decorator 
-```python 
-@button 
+Adding the decorator
+```python
+@button
 ```
 to a function adds a button that triggers that function. The button is located in whatever context manager the function is defined in.
 
@@ -75,14 +75,14 @@ with window():
 </pre>
 </td>
 <td>
-<img src="https://raw.githubusercontent.com/georgewalton/Sandals/master/example%20images/buttonexample.png"
+<img src="example_images\\buttonexample.png"
 alt="Button example">
 </td>
 </tr>
 </table>
 
 Checkboxes, radio buttons, spin boxes, scale bars, and option menus can all be applied as decorators in a similar way. They are also located in whatever context manager (window, stack or flow) the function is defined in.
-For example, here is a simple implementation of a check box to change a boolean; 
+For example, here is a simple implementation of a check box to change a boolean;
 
 ```python
 @checkBox("Is the oven on?", checked = True)
@@ -128,14 +128,14 @@ with window():
 	@button("This button does nothing")
 	def doNothing():
 		pass
-		
+
 	@button("Disable button")
 	def disableButton():
 		doNothing.button.config(state = DISABLED)
 </pre>
 </td>
 <td>
-<img src="https://raw.githubusercontent.com/georgewalton/Sandals/master/example%20images/manipulatingbuttonsexample.png"
+<img src="example_images\\manipulatingbuttonsexample.png"
 alt="Manipulating buttons example">
 </td>
 </tr>
@@ -194,7 +194,7 @@ with window("This is a window"):
 </pre>
 </td>
 <td>
-<img src="https://raw.githubusercontent.com/georgewalton/Sandals/master/example%20images/simpleexample.png"
+<img src="example_images\\simpleexample.png"
 alt="Simple example">
 </td>
 </tr>
@@ -212,20 +212,19 @@ Complete example
 </tr>
 <tr>
 <td>
-<img src="https://raw.githubusercontent.com/georgewalton/Sandals/master/example%20images/example.png"
+<img src="example_images\\example.png"
 alt="Complex example">
 </td>
 </tr>
 </table>
 
-which is a bit of a mess.
 
-Todo
---
-Ideally this library should be rewritten at some point to use TkInter grids, instead of just packing GUI elements. I'm trying to re-write it this way at the moment.
+# TO DO LIST
+- Add to pip.
+- Add support for ttk
+- Rewrite to use tkinter grids as well as pack.
 
-3rd-party content
---
+# 3rd-party content
 
 This library uses the AutoScrollbar class by Fredrik Lundh for the autohiding scrollbars;
 
