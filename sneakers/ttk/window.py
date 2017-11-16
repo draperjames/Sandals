@@ -1,0 +1,87 @@
+from .ttkimports import *
+from . import globalimports as _g
+from .scrollbar import AutoScrollbar
+
+
+def relative_position(root, w=500, h=200):
+    w = int(w)
+    h = int(h)
+    # Width of the screen.
+    ws = root.winfo_screenwidth()
+    # Height of the screen.
+    hs = root.winfo_screenheight()
+    x = int((ws / 2) - (w / 2))
+    y = int((hs / 2) - (h / 2))
+    root.geometry("{:d}x{:d}+{:d}+{:d}".format(w, h, x, y))
+
+
+class window(Tk):
+    def __init__(self, title="Window", window_height=500, window_width=300,
+                 **kw):
+
+        Tk.__init__(self)
+        self.title(title)
+        self.kw = kw
+
+        relative_position(self, window_height, window_width)
+
+    def __enter__(self):
+
+        # create scroll bar
+        self.vscrollbar = AutoScrollbar(self)
+        self.vscrollbar.grid(row=0, column=1, sticky=N+S)
+
+        # create canvas
+        self.canvas = Canvas(self,
+                        yscrollcommand=self.vscrollbar.set, bd=5)
+        self.canvas.grid(row=0, column=0, sticky=N+S+E+W)
+
+        # configure scroll bar for canvas
+        self.vscrollbar.config(command=self.canvas.yview)
+
+        # make the canvas expandable
+        self.grid_rowconfigure(0, weight=1)
+        self.grid_columnconfigure(0, weight=1)
+
+        # create frame in canvas
+        self.frame = Frame(self.canvas)
+        self.frame.columnconfigure(0, weight=1)
+        self.frame.columnconfigure(1, weight=1)
+
+
+        _g.pack_side = TOP
+        _g.root = self.frame
+        return self # was _g.root for some reason
+
+    def __exit__(self, type, value, traceback):
+
+        # puts tkinter widget onto canvas
+        self.canvas.create_window(0, 0, anchor=NW, window=self.frame, width = int(self.canvas.config()['width'][4])-int(self.vscrollbar.config()['width'][4]))
+
+        # deal with canvas being resized
+        def resize_canvas(event):
+            self.canvas.create_window(0, 0, anchor=NW, window=self.frame, width = int(event.width)-int(self.vscrollbar.config()['width'][4]))
+        self.canvas.bind("<Configure>", resize_canvas)
+
+        # updates geometry management
+        self.frame.update_idletasks()
+
+        # set canvas scroll region to all of the canvas
+        self.canvas.config(scrollregion=self.canvas.bbox("all"))
+
+        # set minimum window width
+        self.update()
+        self.minsize(self.winfo_width(), 0)
+        self.config(**self.kw)
+
+        self.frame.update()
+
+        # start mainloop
+        self.mainloop()
+
+        # window closed...
+
+        _g.pack_side = None
+
+        # stop all ongoing _g.events
+        [event.set() for event in _g.events]
