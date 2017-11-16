@@ -3,9 +3,9 @@ A TkInter wrapper for python inspired by the GUI library Shoes for Ruby.
 
 This is intended to make it easier to create simple GUI interfaces quickly. All these classes inheret from their TkInter counterparts so you can use them just as you would their original TkInter counterparts if need be.
 
-To use this library I'd reccommend simply adding this to the top of your script;
+To use this library you can star import to get access to all classes and functions;
 ```python
-from sandals import *
+from sneakers import *
 ```
 How to create windows
 --
@@ -223,9 +223,5 @@ alt="Complex example">
 - Add to pip.
 - Add support for ttk
 - Rewrite to use tkinter grids as well as pack.
-
-# 3rd-party content
-
-This library uses the AutoScrollbar class by Fredrik Lundh for the autohiding scrollbars;
-
-http://effbot.org/zone/tkinter-autoscrollbar.htm
+- Retools this readme.
+- Add attribution from previous repositories.
