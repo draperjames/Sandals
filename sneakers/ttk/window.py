@@ -1,29 +1,25 @@
 from .ttkimports import *
+
+from .ttkimports import Tk
+from .ttkimports import Canvas
+from .ttkimports import Frame
+from .ttkimports import N, S, E, W
+from .ttkimports import TOP
+
 from . import globalimports as _g
 from .scrollbar import AutoScrollbar
 
 
-def relative_position(root, w=500, h=200):
-    w = int(w)
-    h = int(h)
-    # Width of the screen.
-    ws = root.winfo_screenwidth()
-    # Height of the screen.
-    hs = root.winfo_screenheight()
-    x = int((ws / 2) - (w / 2))
-    y = int((hs / 2) - (h / 2))
-    root.geometry("{:d}x{:d}+{:d}+{:d}".format(w, h, x, y))
-
-
 class window(Tk):
-    def __init__(self, title="Window", window_height=500, window_width=300,
-                 **kw):
+    def __init__(self, title="Window", geometry=(500, 300),
+                 position='relative', **kw):
 
         Tk.__init__(self)
         self.title(title)
         self.kw = kw
 
-        relative_position(self, window_height, window_width)
+        if position is 'relative':
+            self.relative_position(geometry[0], geometry[1])
 
     def __enter__(self):
 
@@ -32,8 +28,8 @@ class window(Tk):
         self.vscrollbar.grid(row=0, column=1, sticky=N+S)
 
         # create canvas
-        self.canvas = Canvas(self,
-                        yscrollcommand=self.vscrollbar.set, bd=5)
+        self.canvas = Canvas(self, yscrollcommand=self.vscrollbar.set, bd=5)
+
         self.canvas.grid(row=0, column=0, sticky=N+S+E+W)
 
         # configure scroll bar for canvas

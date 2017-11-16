@@ -2,7 +2,7 @@
 from sneakers.ttk import *
 
 def ex0():
-    with window():
+    with window(geometry=(500, 200)):
 
         @button("Create a popup box")
         def makePopupBox():
@@ -31,4 +31,4 @@ def ex1():
 
 if __name__ == '__main__':
     ex0()
-    ex1()
+    # ex1()

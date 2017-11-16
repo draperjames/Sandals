@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 
 # Python 3
 try:
@@ -13,9 +14,12 @@ try:
     # from tkinter.ttk import Scrollbar
 
     # regular tkinter imports.
+    # from tkinter import Tk
+    from .utils.window_tools import Tk
+
     from tkinter import Frame
     from tkinter import Scrollbar
-    from tkinter import Tk
+
     from tkinter import Canvas
     from tkinter import Listbox
     from tkinter import Message
